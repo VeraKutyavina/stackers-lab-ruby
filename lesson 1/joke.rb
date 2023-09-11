@@ -1,7 +1,12 @@
 require "HTTParty"
 require "nokogiri"
+require 'uri'
 
-url = 'https://anekdot.ru'
+category = gets.chomp
+
+encoded_text = URI.encode_www_form_component(category)
+url = "https://anekdot.ru/tags/#{encoded_text}"
+
 html = HTTParty.get(url)
 doc = Nokogiri::HTML(html)
 
